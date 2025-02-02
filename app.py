@@ -264,15 +264,3 @@ if uploaded_file is not None:
                 # Display topics
                 for topic, words in topics.items():
                     st.write(f"**{topic}:** {', '.join(words)}")
-
-
-
-
-
-
-
-
-
-
-
-
