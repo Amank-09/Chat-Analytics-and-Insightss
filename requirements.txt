@@ -1,5 +1,7 @@
 streamlit
 matplotlib
+preprocessor
+helper
 seaborn
 urlextract
 wordcloud
@@ -8,5 +10,7 @@ emoji
 numpy
 plotly
 logging
-gensim
-scipy
+gensim==4.3.3
+scipy==1.13.1
+dictionary 
+LdaModel
