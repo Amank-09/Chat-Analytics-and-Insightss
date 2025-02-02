@@ -8,3 +8,4 @@ emoji
 numpy
 plotly
 logging
+gensim
