@@ -5,3 +5,6 @@ urlextract
 wordcloud
 pandas
 emoji
+numpy
+plotly
+logging
