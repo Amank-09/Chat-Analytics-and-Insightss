@@ -1,0 +1,3 @@
+libfreetype6
+libfreetype6-dev
+libpng-dev
