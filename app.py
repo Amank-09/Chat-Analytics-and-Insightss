@@ -197,7 +197,7 @@ if uploaded_file is not None:
                 ax.set_ylabel("Words", fontproperties=prop)
                 ax.set_yticks(range(len(most_common_df[0])))
                 ax.set_yticklabels(most_common_df[0], fontproperties=prop)  # Apply emoji font to y-axis labels
-                plt.xticks(rotation='vertical',fontproperties=prop))
+                plt.xticks(rotation='vertical',fontproperties=prop)
                 st.pyplot(fig)
 
                 # Emoji Analysis
@@ -271,5 +271,6 @@ if uploaded_file is not None:
                 # Display topics
                 for topic, words in topics.items():
                     st.write(f"**{topic}:** {', '.join(words)}")
+
 
 
