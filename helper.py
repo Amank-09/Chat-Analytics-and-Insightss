@@ -84,7 +84,7 @@ def create_wordcloud(selected_user, df):
         height=500,
         min_font_size=10,
         background_color="white",
-        font_path=FONT_PATH   # ✅ Forces your repo font
+        font_path=emoji_font_prop.get_file() if emoji_font_prop.get_file() else None
     )
 
     return wc.generate(text)
@@ -213,6 +213,7 @@ def topic_modeling(df, num_topics):
     topic_words = {f"Topic {i}": [word for word, _ in topic[1]] for i, topic in enumerate(topics)}
 
     return topic_words
+
 
 
 
