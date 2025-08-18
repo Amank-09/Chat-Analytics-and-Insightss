@@ -23,6 +23,7 @@ except LookupError:
     import nltk
     nltk.download("punkt")
 
+BASE_DIR = os.path.dirname(__file__)
 STOPWORDS_PATH = os.path.join(BASE_DIR, "stop_hinglish.txt")
 
 
@@ -212,6 +213,7 @@ def topic_modeling(df, num_topics):
     topic_words = {f"Topic {i}": [word for word, _ in topic[1]] for i, topic in enumerate(topics)}
 
     return topic_words
+
 
 
 
