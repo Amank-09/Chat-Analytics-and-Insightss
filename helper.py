@@ -18,31 +18,30 @@ extract = URLExtract()
 BASE_DIR = os.path.dirname(__file__)
 FONT_DIR = os.path.join(BASE_DIR, "fonts")
 
-DEVANAGARI_FONT = os.path.join(FONT_DIR, "NotoSansDevanagari-Regular.ttf")
-EMOJI_FONT = os.path.join(FONT_DIR, "NotoEmoji-Regular.ttf")
+# Font file paths
+DEVANAGARI_FONT_PATH = os.path.join(FONT_DIR, "NotoSansDevanagari-Regular.ttf")
+EMOJI_FONT_PATH = os.path.join(FONT_DIR, "NotoEmoji-Regular.ttf")
 
-# Fallback to DejaVuSans if custom font not found
-if not os.path.exists(DEVANAGARI_FONT):
-    DEVANAGARI_FONT = matplotlib.get_data_path() + "/fonts/ttf/DejaVuSans.ttf"
+# Fallbacks: use DejaVuSans if fonts are missing
+if not os.path.exists(DEVANAGARI_FONT_PATH):
+    DEVANAGARI_FONT_PATH = os.path.join(matplotlib.get_data_path(), "fonts/ttf/DejaVuSans.ttf")
 
-if not os.path.exists(EMOJI_FONT):
-    EMOJI_FONT = matplotlib.get_data_path() + "/fonts/ttf/DejaVuSans.ttf"
+if not os.path.exists(EMOJI_FONT_PATH):
+    EMOJI_FONT_PATH = os.path.join(matplotlib.get_data_path(), "fonts/ttf/DejaVuSans.ttf")
 
 try:
-    from matplotlib import font_manager as fm
-    
-    # Register fonts
-    fm.fontManager.addfont(DEVANAGARI_FONT)
-    fm.fontManager.addfont(EMOJI_FONT)
-    
-    # Define two font properties
-    devanagari_font_prop = FontProperties(fname=DEVANAGARI_FONT)
-    emoji_font_prop = FontProperties(fname=EMOJI_FONT)
+    # Register fonts with matplotlib
+    fm.fontManager.addfont(DEVANAGARI_FONT_PATH)
+    fm.fontManager.addfont(EMOJI_FONT_PATH)
+
+    # Create reusable font properties
+    devanagari_font_prop = FontProperties(fname=DEVANAGARI_FONT_PATH)
+    emoji_font_prop = FontProperties(fname=EMOJI_FONT_PATH)
 
 except Exception as e:
-    print("Font loading failed:", e)
-    devanagari_font_prop = FontProperties()
-    emoji_font_prop = FontProperties()
+    print("⚠️ Font loading failed:", e)
+    devanagari_font_prop = FontProperties()  # Default font
+    emoji_font_prop = FontProperties() 
 
 
 try:
@@ -241,6 +240,7 @@ def topic_modeling(df, num_topics):
     topic_words = {f"Topic {i}": [word for word, _ in topic[1]] for i, topic in enumerate(topics)}
 
     return topic_words
+
 
 
 
