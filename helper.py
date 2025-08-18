@@ -16,6 +16,10 @@ extract = URLExtract()
 
 BASE_DIR = os.path.dirname(__file__)
 FONT_DIR = os.path.join(BASE_DIR, "fonts")
+FONT_PATH = os.path.join(FONT_DIR, "NotoSansDevanagari-Regular.ttf")
+
+if not os.path.exists(FONT_PATH):
+    FONT_PATH = matplotlib.get_data_path() + "/fonts/ttf/DejaVuSans.ttf"
 
 CANDIDATE_FONTS = [
     os.path.join(FONT_DIR, "NotoColorEmoji.ttf"),
@@ -23,9 +27,6 @@ CANDIDATE_FONTS = [
     os.path.join(FONT_DIR, "NotoEmoji-Regular.ttf"),
     os.path.join(FONT_DIR, "Symbola.ttf"),
 ]
-FONT_PATH = os.path.join(FONT_DIR, "NotoSansDevanagari-Regular.ttf")
-if not os.path.exists(FONT_PATH):
-    FONT_PATH = matplotlib.get_data_path() + "/fonts/ttf/DejaVuSans.ttf"
 
 font_path = None
 for p in CANDIDATE_FONTS:
@@ -234,6 +235,7 @@ def topic_modeling(df, num_topics):
     topic_words = {f"Topic {i}": [word for word, _ in topic[1]] for i, topic in enumerate(topics)}
 
     return topic_words
+
 
 
 
