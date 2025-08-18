@@ -10,7 +10,7 @@ import logging
 import datetime
 from matplotlib import font_manager as fm
 from io import BytesIO
-from font_config import emoji_font_prop  
+from helper import devanagari_font_prop, emoji_font_prop
 
 
 
@@ -272,6 +272,7 @@ if uploaded_file is not None:
                 # Display topics
                 for topic, words in topics.items():
                     st.write(f"**{topic}:** {', '.join(words)}")
+
 
 
 
