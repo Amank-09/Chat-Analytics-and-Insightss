@@ -192,12 +192,12 @@ if uploaded_file is not None:
 
                 # Plot data and apply the emoji font
                 ax.barh(most_common_df[0], most_common_df[1], color='skyblue')
-                ax.set_title('🔥Most Common Words',fontproperties=prop)
-                ax.set_xlabel("Count", fontproperties=prop)
-                ax.set_ylabel("Words", fontproperties=prop)
+                ax.set_title('🔥Most Common Words',fontproperties=devanagari_font_prop)
+                ax.set_xlabel("Count", fontproperties=devanagari_font_prop)
+                ax.set_ylabel("Words", fontproperties=devanagari_font_prop)
                 ax.set_yticks(range(len(most_common_df[0])))
-                ax.set_yticklabels(most_common_df[0], fontproperties=prop)  # Apply emoji font to y-axis labels
-                plt.xticks(rotation='vertical',fontproperties=prop)
+                ax.set_yticklabels(most_common_df[0], fontproperties=devanagari_font_prop)  # Apply emoji font to y-axis labels
+                plt.xticks(rotation='vertical', fontproperties=devanagari_font_prop)
                 st.pyplot(fig)
 
                 # Emoji Analysis
@@ -234,10 +234,11 @@ if uploaded_file is not None:
                         autotext.set_fontsize(6)
                         autotext.set_color("black")
                         autotext.set_fontweight("bold")
+                        autotext.set_fontproperties(devanagari_font_prop) 
 
                     # Style emoji labels using custom emoji-compatible font
                     for text in texts:
-                        text.set_fontproperties(emoji_font)
+                        text.set_fontproperties(emoji_font_prop)
                         text.set_fontsize(14)
                         text.set_color("black")
 
@@ -246,7 +247,7 @@ if uploaded_file is not None:
                     # fig.gca().add_artist(center_circle)
 
                     # Add a title to the pie chart
-                    ax.set_title("Top Emoji Usage", fontsize=16, weight="bold", fontproperties=emoji_font_prop)
+                    ax.set_title("Top Emoji Usage", fontsize=16, weight="bold", fontproperties=devanagari_font_prop)
 
                     # Display the chart in Streamlit
                     st.pyplot(fig)
@@ -271,6 +272,7 @@ if uploaded_file is not None:
                 # Display topics
                 for topic, words in topics.items():
                     st.write(f"**{topic}:** {', '.join(words)}")
+
 
 
 
