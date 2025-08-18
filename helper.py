@@ -21,29 +21,12 @@ FONT_PATH = os.path.join(FONT_DIR, "NotoSansDevanagari-Regular.ttf")
 if not os.path.exists(FONT_PATH):
     FONT_PATH = matplotlib.get_data_path() + "/fonts/ttf/DejaVuSans.ttf"
 
-CANDIDATE_FONTS = [
-    os.path.join(FONT_DIR, "NotoColorEmoji.ttf"),
-    os.path.join(FONT_DIR, "NotoEmoji.ttf"),
-    os.path.join(FONT_DIR, "NotoEmoji-Regular.ttf"),
-    os.path.join(FONT_DIR, "Symbola.ttf"),
-]
-
-font_path = None
-for p in CANDIDATE_FONTS:
-    if os.path.exists(p):
-        font_path = p
-        break
-
-if font_path is None:
-    font_path = matplotlib.get_data_path() + "/fonts/ttf/DejaVuSans.ttf"
-
 try:
-    if os.path.exists(font_path):
-        fm.fontManager.addfont(font_path)
-        emoji_font_prop = FontProperties(fname=font_path)
-    else:
-        emoji_font_prop = FontProperties()
+    from matplotlib import font_manager as fm
+    fm.fontManager.addfont(FONT_PATH)
+    emoji_font_prop = FontProperties(fname=FONT_PATH)
 except Exception:
+    from matplotlib.font_manager import FontProperties
     emoji_font_prop = FontProperties()
 
 try:
@@ -235,6 +218,7 @@ def topic_modeling(df, num_topics):
     topic_words = {f"Topic {i}": [word for word, _ in topic[1]] for i, topic in enumerate(topics)}
 
     return topic_words
+
 
 
 
