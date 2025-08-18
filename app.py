@@ -192,10 +192,12 @@ if uploaded_file is not None:
 
                 # Plot data and apply the emoji font
                 ax.barh(most_common_df[0], most_common_df[1], color='skyblue')
-                ax.set_title('🔥Most Common Words')
+                ax.set_title('🔥Most Common Words',fontproperties=prop))
+                ax.set_xlabel("Count", fontproperties=prop)
+                ax.set_ylabel("Words", fontproperties=prop)
                 ax.set_yticks(range(len(most_common_df[0])))
                 ax.set_yticklabels(most_common_df[0], fontproperties=prop)  # Apply emoji font to y-axis labels
-                plt.xticks(rotation='vertical')
+                plt.xticks(rotation='vertical',fontproperties=prop))
                 st.pyplot(fig)
 
                 # Emoji Analysis
@@ -244,7 +246,7 @@ if uploaded_file is not None:
                     # fig.gca().add_artist(center_circle)
 
                     # Add a title to the pie chart
-                    ax.set_title("Top Emoji Usage", fontsize=16, weight="bold")
+                    ax.set_title("Top Emoji Usage", fontsize=16, weight="bold", fontproperties=emoji_font_prop)
 
                     # Display the chart in Streamlit
                     st.pyplot(fig)
@@ -269,4 +271,5 @@ if uploaded_file is not None:
                 # Display topics
                 for topic, words in topics.items():
                     st.write(f"**{topic}:** {', '.join(words)}")
+
 
