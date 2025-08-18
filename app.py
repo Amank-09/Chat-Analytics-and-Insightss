@@ -192,7 +192,7 @@ if uploaded_file is not None:
 
                 # Plot data and apply the emoji font
                 ax.barh(most_common_df[0], most_common_df[1], color='skyblue')
-                ax.set_title('🔥Most Common Words',fontproperties=prop))
+                ax.set_title('🔥Most Common Words',fontproperties=prop)
                 ax.set_xlabel("Count", fontproperties=prop)
                 ax.set_ylabel("Words", fontproperties=prop)
                 ax.set_yticks(range(len(most_common_df[0])))
@@ -271,6 +271,7 @@ if uploaded_file is not None:
                 # Display topics
                 for topic, words in topics.items():
                     st.write(f"**{topic}:** {', '.join(words)}")
+
 
 
 
