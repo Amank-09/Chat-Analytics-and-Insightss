@@ -1,3 +1,4 @@
+from helper import create_wordcloud, sentiment_analysis, topic_modeling
 import streamlit as st
 import preprocessor,helper
 import matplotlib.pyplot as plt
@@ -6,6 +7,12 @@ import numpy as np
 import plotly.express as px
 import seaborn as sns
 import logging
+import datetime
+from matplotlib import font_manager as fm
+from io import BytesIO
+from font_config import emoji_font_prop  
+
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -143,9 +150,6 @@ if uploaded_file is not None:
 
             # WordCloud
             with tab3:
-                from helper import create_wordcloud, sentiment_analysis, topic_modeling
-                from matplotlib import font_manager as fm
-                emoji_font_path = "C:/Windows/Fonts/seguiemj.ttf"
                 st.title("Emoji & Word Analysis")
                 st.title("Wordcloud")
                 
@@ -176,7 +180,8 @@ if uploaded_file is not None:
                     )
 
                 # most common words
-                prop = fm.FontProperties(fname=emoji_font_path)
+                prop = emoji_font_prop
+
 
                 # Fetch most common words
                 most_common_df = helper.most_common_words(selected_user, df)
@@ -205,7 +210,7 @@ if uploaded_file is not None:
 
                 #Pie Chart
                 with col2:
-                    emoji_font = fm.FontProperties(fname=emoji_font_path)
+                    emoji_font = emoji_font_prop
                     fig, ax = plt.subplots(figsize=(8, 8))  # Adjust figure size for better readability
                     
                     # Extract top 5 emojis and their usage counts
@@ -264,3 +269,4 @@ if uploaded_file is not None:
                 # Display topics
                 for topic, words in topics.items():
                     st.write(f"**{topic}:** {', '.join(words)}")
+
