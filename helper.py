@@ -23,6 +23,9 @@ CANDIDATE_FONTS = [
     os.path.join(FONT_DIR, "NotoEmoji-Regular.ttf"),
     os.path.join(FONT_DIR, "Symbola.ttf"),
 ]
+FONT_PATH = os.path.join(FONT_DIR, "NotoSansDevanagari-Regular.ttf")
+if not os.path.exists(FONT_PATH):
+    FONT_PATH = matplotlib.get_data_path() + "/fonts/ttf/DejaVuSans.ttf"
 
 font_path = None
 for p in CANDIDATE_FONTS:
@@ -104,7 +107,7 @@ def create_wordcloud(selected_user, df):
     if not text.strip():
         return "No valid words available to generate a word cloud."
 
-    wc = WordCloud(width=500, height=500, min_font_size=10, background_color="white", font_path='fonts/NotoSansDevanagari-Regular.ttf')
+    wc = WordCloud(width=500, height=500, min_font_size=10, background_color="white", font_path='FONT_PATH)
     return wc.generate(text)
 
 
@@ -231,4 +234,5 @@ def topic_modeling(df, num_topics):
     topic_words = {f"Topic {i}": [word for word, _ in topic[1]] for i, topic in enumerate(topics)}
 
     return topic_words
+
 
