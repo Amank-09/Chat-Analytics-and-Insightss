@@ -26,13 +26,12 @@ try:
     fm.fontManager.addfont(FONT_PATH)
     emoji_font_prop = FontProperties(fname=FONT_PATH)
 except Exception:
-    from matplotlib.font_manager import FontProperties
     emoji_font_prop = FontProperties()
 
 try:
     import nltk
     nltk.data.find("tokenizers/punkt")
-except Exception:
+except LookupError:
     import nltk
     nltk.download("punkt")
 
@@ -91,7 +90,14 @@ def create_wordcloud(selected_user, df):
     if not text.strip():
         return "No valid words available to generate a word cloud."
 
-    wc = WordCloud(width=500, height=500, min_font_size=10, background_color="white", font_path=FONT_PATH)
+    wc = WordCloud(
+        width=500,
+        height=500,
+        min_font_size=10,
+        background_color="white",
+        font_path=FONT_PATH   # ✅ Forces your repo font
+    )
+
     return wc.generate(text)
 
 
@@ -218,6 +224,7 @@ def topic_modeling(df, num_topics):
     topic_words = {f"Topic {i}": [word for word, _ in topic[1]] for i, topic in enumerate(topics)}
 
     return topic_words
+
 
 
 
