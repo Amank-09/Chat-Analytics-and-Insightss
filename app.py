@@ -150,108 +150,6 @@ if uploaded_file is not None:
 
             # WordCloud
             with tab3:
-                st.title("Emoji & Word Analysis")
-                st.title("Wordcloud")
-                
-                # Generate the WordCloud
-                df_wc = create_wordcloud(selected_user, df)
-        
-                if isinstance(df_wc, str):
-                    st.error(df_wc)
-                else:
-                    # Display the WordCloud using Matplotlib
-                    fig, ax = plt.subplots(figsize=(6, 6))
-                    ax.imshow(df_wc, interpolation='bilinear')
-                    ax.axis("off")  # Hide axes for better appearance
-                    st.pyplot(fig)
-                    
-                    # Save WordCloud to a file-like object
-                    from io import BytesIO
-                    buffer = BytesIO()
-                    fig.savefig(buffer, format="png", bbox_inches="tight")
-                    buffer.seek(0)
-                    
-                    # Add a download button
-                    st.download_button(
-                        label="Download WordCloud",
-                        data=buffer,
-                        file_name="wordcloud.png",
-                        mime="image/png"
-                    )
-
-                # most common words
-                prop = emoji_font_prop
-
-
-                # Fetch most common words
-                most_common_df = helper.most_common_words(selected_user, df)
-                st.write(most_common_df.head())
-
-                # Create a horizontal bar plot
-                fig, ax = plt.subplots()
-
-                # Plot data and apply the emoji font
-                ax.barh(most_common_df[0], most_common_df[1], color='skyblue')
-                ax.set_title('🔥Most Common Words', fontproperties=devanagari_font_prop)
-                ax.set_xlabel("Count",  fontproperties=devanagari_font_prop)
-                ax.set_ylabel("Words",  fontproperties=devanagari_font_prop)
-                ax.set_yticks(range(len(most_common_df[0])))
-                ax.set_yticklabels(most_common_df[0],  fontproperties=devanagari_font_prop)  # Apply emoji font to y-axis labels
-                plt.xticks(rotation='vertical', fontproperties=devanagari_font_prop)
-                st.pyplot(fig)
-
-                # Emoji Analysis
-                emoji_df = helper.emoji_helper(selected_user, df)
-                st.title("Emoji Analysis")
-
-                col1, col2 = st.columns(2)
-
-                # Display Emoji Data in a Table
-                with col1:
-                    st.dataframe(emoji_df)
-
-                #Pie Chart
-                with col2:
-                    emoji_font = emoji_font_prop
-                    fig, ax = plt.subplots(figsize=(8, 8))  # Adjust figure size for better readability
-                    
-                    # Extract top 5 emojis and their usage counts
-                    emoji_labels = emoji_df[0].head()  # First column (emojis)
-                    emoji_values = emoji_df[1].head()  # Second column (frequencies)
-                    
-                    # Plot the pie chart
-                    wedges, texts, autotexts = ax.pie(
-                        emoji_values,
-                        labels=emoji_labels,
-                        autopct="%1.1f%%",  # Display percentages
-                        startangle=90,  # Align largest slice at top
-                        pctdistance=0.95,  # Position percentages closer to the center
-                        colors=plt.cm.Set3.colors,  # Use a visually distinct color palette
-                    )
-
-                    # Style percentage labels
-                    for autotext in autotexts:
-                        autotext.set_fontsize(6)
-                        autotext.set_color("black")
-                        autotext.set_fontweight("bold")
-                        autotext.set_fontproperties(devanagari_font_prop)
-
-                    # Style emoji labels using custom emoji-compatible font
-                    for text in texts:
-                        text.set_fontproperties(emoji_font_prop)
-                        text.set_fontsize(14)
-                        text.set_color("black")
-
-                    # Add a central circle to make it a donut chart (optional)
-                    # center_circle = plt.Circle((0, 0), 0.70, fc="white")
-                    # fig.gca().add_artist(center_circle)
-
-                    # Add a title to the pie chart
-                    ax.set_title("Top Emoji Usage", fontsize=16, weight="bold",  fontproperties=devanagari_font_prop)
-
-                    # Display the chart in Streamlit
-                    st.pyplot(fig)
-                
                 # Sentiment Analysis
                 st.title("📈 Sentiment Analysis")
                 daily_sentiment = sentiment_analysis(df)
@@ -272,6 +170,7 @@ if uploaded_file is not None:
                 # Display topics
                 for topic, words in topics.items():
                     st.write(f"**{topic}:** {', '.join(words)}")
+
 
 
 
